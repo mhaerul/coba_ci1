@@ -11,6 +11,8 @@
   <link href="<?php echo base_url(); ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo base_url(); ?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">    
   <link href="<?php echo base_url(); ?>assets/css/sb-admin.css" rel="stylesheet">
+  <script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery.min.js"></script>
+  
 </head>
 <body id="page-top">
   <div id="content-wrapper">

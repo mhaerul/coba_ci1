@@ -8,7 +8,7 @@
 <div id="wrapper">
   <ul class="sidebar navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="<?php echo base_url(); ?>index.php/karyawan/">
+      <a class="nav-link" href="<?php echo base_url(); ?>karyawan/">
         <i class="fas fa-fw fa-user"></i>
         <span>Karyawan</span>
       </a>
