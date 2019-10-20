@@ -3,35 +3,7 @@
   <div class="card-body">
     <a class="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#karyawanModal">Add Data</a><br><br>
     <!-- <a href="<?php echo base_url(); ?>karyawan/add" class="btn btn-info btn-sm">Add Data</a><br><br> -->
-    <div class="table-responsive">
-      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <tr>
-          <th width='20px'>NO</th>
-          <th>NIK</th>
-          <th>NAMA</th>
-          <th>DIVISI</th>
-          <th>ACTION</th>
-        </tr>
-        <?php
-          $no = 1;
-          foreach($karyawan as $k) { ?>
-            <tr>
-              <td><?php echo $no; ?></td>
-              <td><?php echo $k->nik; ?></td>
-              <td><?php echo $k->nama; ?></td>
-              <td><?php echo $k->division; ?></td>
-              <td>
-                <a href="<?php echo base_url(); ?>karyawan/edit/<?php echo $k->nik; ?>" class="btn btn-primary btn-sm">Edit</a>
-                <a href="<?php echo base_url(); ?>karyawan/delete/<?php echo $k->nik; ?>" class="btn btn-danger btn-sm">Delete</a>
-              </td>
-            </tr>
-            <?php
-            $no++;
-          }
-          ?>
-
-      </table>
-    </div>
+    <div id='data'></div>
   </div>
 </div>
 
@@ -44,18 +16,18 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <form id='form-add' action="<?php echo base_url(); ?>karyawan/addData" method="POST">
+      <form id='form-add' action="./karyawan/addData" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group row">
             <label for="inputEmail3" class="col-sm-2 col-form-label">NIK</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="NIK" name="NIK" placeholder="NIK">
+              <input type="text" class="form-control" id="NIK" name="NIK" placeholder="NIK" onkeyup="this.value = this.value.toUpperCase();" required>
             </div>
           </div>
           <div class="form-group row">
             <label for="inputEmail3" class="col-sm-2 col-form-label">NAMA</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="NAMA" name="NAMA" placeholder="NAMA">
+              <input type="text" class="form-control" id="NAMA" name="NAMA" placeholder="NAMA" onkeyup="this.value = this.value.toUpperCase();" required>
             </div>
           </div>
           <div class="form-group row">
@@ -70,6 +42,12 @@
               </select>
             </div>
           </div>
+          <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">FOTO</label>
+            <div class="col-sm-10">
+              <input type="file" id="berkas" name="berkas" required>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -81,17 +59,29 @@
 </div>
 
 <script>
-  $("#form-add").submit(function(e) {
-    e.preventDefault();
+  // $("#form-add").submit(function(e) {
+  //   e.preventDefault();
 
+  //   $.ajax({
+  //     url : '<?php echo base_url(); ?>karyawan/addData',
+  //     type : 'post',
+  //     data : $(this).serialize(),
+  //     success : function(e){
+  //       load_data();
+  //       $(".close").click();
+  //       console.log(e);
+  //     }
+  //   }); 
+  // });
+
+  function load_data() {
     $.ajax({
-      url : '<?php echo base_url(); ?>karyawan/addData',
-      type : 'post',
-      data : $(this).serialize(),
-      success : function(e){
-        console.log(e);
+      url : '<?php echo base_url(); ?>karyawan/loadData',
+      success : function(e) {
+        $("#data").html(e);
       }
-    }); 
+    });
+  }
 
-  });
+  load_data();
 </script>

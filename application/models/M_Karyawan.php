@@ -10,5 +10,9 @@
         function get_divisi() {
             return $this->db->get('divisi')->result();
         }
+
+        function tambah($data,$table) {
+            $this->db->insert($table,$data);
+        }
     }
 ?>
