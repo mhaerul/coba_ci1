@@ -59,20 +59,24 @@
 </div>
 
 <script>
-  // $("#form-add").submit(function(e) {
-  //   e.preventDefault();
-
-  //   $.ajax({
-  //     url : '<?php echo base_url(); ?>karyawan/addData',
-  //     type : 'post',
-  //     data : $(this).serialize(),
-  //     success : function(e){
-  //       load_data();
-  //       $(".close").click();
-  //       console.log(e);
-  //     }
-  //   }); 
-  // });
+  $("#form-add").submit(function(e) {
+    e.preventDefault();
+  
+    $.ajax({
+      url : '<?php echo base_url(); ?>karyawan/addData',
+      type : 'post',
+      data:new FormData(this),
+      processData:false,
+      contentType:false,
+      cache:false,
+      async:false,
+      success : function(e){
+        load_data();
+        $(".close").click();
+        console.log(e);
+      }
+    }); 
+  });
 
   function load_data() {
     $.ajax({

@@ -19,27 +19,29 @@
 		}
 
 		function addData() {
-			$data = array(
-				'nik' => $this->input->post('NIK'),
-				'nama' => $this->input->post('NAMA'),
-				'divisi' => $this->input->post('DIVISI'),
-				'insert_date' => 'NOW()'
-			);
-
-			$this->M_Karyawan->tambah($data,'karyawan');
-
-			echo var_dump($_FILES);
-			$config['upload-path'] = './image/';
+			$config['upload_path'] = './image/';
 			$config['allowed_types'] = 'gif|jpg|png';
+			$config['encrypt_name'] = true;
 			
 			$this->load->library('upload',$config);
-
+	
 			if ( ! $this->upload->do_upload('berkas')){
 				$error = array('error' => $this->upload->display_errors());
 				echo var_dump($error);
 			}else{
 				$data = array('upload_data' => $this->upload->data());
-				echo var_dump($data);
+				
+				$datax = array(
+					'nik' => $this->input->post('NIK'),
+					'nama' => $this->input->post('NAMA'),
+					'divisi' => $this->input->post('DIVISI'),
+					'insert_date' => 'NOW()',
+					'foto' => $data['upload_data']['file_name']
+				);
+	
+				$this->M_Karyawan->tambah($datax,'karyawan');
+				
+				echo "sukses";
 			}
 		}
 
@@ -54,6 +56,7 @@
 							<th>NIK</th>
 							<th>NAMA</th>
 							<th>DIVISI</th>
+							<th>FOTO</th>
 							<th>ACTION</th>
         				</tr>";
 						
@@ -65,6 +68,7 @@
 							<td> $r->nik </td>
 							<td> $r->nama </td>
 							<td> $r->division </td>
+							<td> <img src='./image/$r->foto' width='100px'/></td>
 							<td>
 							<a href='`.base_url().`karyawan/edit/$r->nik' class='btn btn-primary btn-sm'>Edit</a>
 							<a href='`.base_url().`karyawan/delete/$r->nik' class='btn btn-danger btn-sm'>Delete</a>
