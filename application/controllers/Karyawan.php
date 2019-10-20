@@ -45,6 +45,12 @@
 			}
 		}
 
+		function hapus($id) {
+			$where = array ('nik' => $id);
+			$this->M_Karyawan->hapus($where,'karyawan');
+			echo "sukses";
+		}
+
 		function loadData() {
 			$result = $this->M_Karyawan->tampil_data();
 			
@@ -68,10 +74,13 @@
 							<td> $r->nik </td>
 							<td> $r->nama </td>
 							<td> $r->division </td>
-							<td> <img src='./image/$r->foto' width='100px'/></td>
-							<td>
-							<a href='`.base_url().`karyawan/edit/$r->nik' class='btn btn-primary btn-sm'>Edit</a>
-							<a href='`.base_url().`karyawan/delete/$r->nik' class='btn btn-danger btn-sm'>Delete</a>
+							<td> <img src='./image/$r->foto' width='100px' alt='NO IMAGE!!!'/></td>
+							<td>"; ?>
+							
+							<a href='#' class='btn btn-primary btn-sm'>Edit</a>
+							<a href='#' onclick="hapus('<?php echo $r->nik; ?>')" class='btn btn-danger btn-sm'>Delete</a>
+							
+							<?php echo "
 							</td>
 						</tr>
 				";
