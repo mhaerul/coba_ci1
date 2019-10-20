@@ -88,4 +88,16 @@
   }
 
   load_data();
+
+  function hapus(id) {
+    if (confirm("Delete this data?")) {
+      $.ajax({
+        url : '<?php echo base_url(); ?>karyawan/hapus/'+id,
+        success : function(e) {
+          load_data();
+          console.log(e);
+        }
+      });
+    }
+  }
 </script>
