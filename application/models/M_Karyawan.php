@@ -7,6 +7,10 @@
             return $this->db->get()->result();
         }
         
+        function getData($where,$table) {
+            return $this->db->get_where($table,$where)->result();
+        }
+
         function get_divisi() {
             return $this->db->get('divisi')->result();
         }
