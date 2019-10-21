@@ -45,6 +45,11 @@
 			}
 		}
 
+		function getData($nik) {
+			$data = $this->M_Karyawan->getData(array('nik'=>$nik),'karyawan');
+			echo json_encode($data);
+		}
+
 		function hapus($id) {
 			$where = array ('nik' => $id);
 			$this->M_Karyawan->hapus($where,'karyawan');
@@ -77,7 +82,7 @@
 							<td> <img src='./image/$r->foto' width='100px' alt='NO IMAGE!!!'/></td>
 							<td>"; ?>
 							
-							<a href='#' class='btn btn-primary btn-sm'>Edit</a>
+							<a class="btn btn-info btn-sm" href="#" data-toggle='modal' data-target='#karyawanModal2' onClick="editData('<?php echo $r->nik; ?>')">Edit</a>
 							<a href='#' onclick="hapus('<?php echo $r->nik; ?>')" class='btn btn-danger btn-sm'>Delete</a>
 							
 							<?php echo "
