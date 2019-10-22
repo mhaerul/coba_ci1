@@ -18,6 +18,23 @@
 			$this->load->view('foot');
 		}
 
+		function editData() {
+			$data = array(
+				'nama' => $this->input->post('NAMA'),
+				'divisi' => $this->input->post('DIVISI')
+			);
+
+			$where = array(
+				'nik' => $this->input->post('NIK')
+			);
+			
+			if ($this->M_Karyawan->update_data($where,$data,'karyawan')) {
+				echo "sukses";
+			}
+			
+
+		}
+
 		function addData() {
 			$config['upload_path'] = './image/';
 			$config['allowed_types'] = 'gif|jpg|png';
@@ -79,7 +96,7 @@
 							<td> $r->nik </td>
 							<td> $r->nama </td>
 							<td> $r->division </td>
-							<td> <img src='./image/$r->foto' width='100px' alt='NO IMAGE!!!'/></td>
+							<td> <img src='".base_url()."/image/$r->foto' width='100px' alt='NO IMAGE!!!'/></td>
 							<td>"; ?>
 							
 							<a class="btn btn-info btn-sm" href="#" data-toggle='modal' data-target='#karyawanModal2' onClick="editData('<?php echo $r->nik; ?>')">Edit</a>
@@ -89,6 +106,7 @@
 							</td>
 						</tr>
 				";
+
 				$no++;
 			}
 

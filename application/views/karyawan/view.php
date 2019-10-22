@@ -122,6 +122,25 @@
     }); 
   });
 
+  $("#form-edit").submit(function(e) {
+    e.preventDefault();
+  
+    $.ajax({
+      url : '<?php echo base_url(); ?>karyawan/editData',
+      type : 'post',
+      data:new FormData(this),
+      processData:false,
+      contentType:false,
+      cache:false,
+      async:false,
+      success : function(e){
+        load_data();
+        $(".close").click();
+        console.log(e);
+      }
+    }); 
+  });
+
   function load_data() {
     $.ajax({
       url : '<?php echo base_url(); ?>karyawan/loadData',
